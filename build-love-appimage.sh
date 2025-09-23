@@ -10,8 +10,32 @@ sudo apt-get install --assume-yes build-essential git make cmake autoconf automa
      libegl1-mesa-dev libibus-1.0-dev fcitx-libs-dev libsamplerate0-dev \
      libsndio-dev libwayland-dev libxkbcommon-dev libdrm-dev libgbm-dev \
      liblua5.4-dev libmodplug-dev libfreetype-dev libopengl-dev libopenal-dev \
-     libmpg123-dev libvorbis-dev libtheora-dev libsdl2-dev
+     libmpg123-dev libvorbis-dev libtheora-dev #libsdl2-dev
 
+## Versions
+SDL2_BRANCH=release-2.28.5
+# OPENAL_BRANCH=1.23.1
+# BROTLI_BRANCH=v1.0.9
+# ZLIB_BRANCH=v1.3
+
+
+# LIBOGG_VERSION=1.3.5
+# LIBVORBIS_VERSION=1.3.7
+# LIBTHEORA_VERSION=1.2.0alpha1
+# LIBPNG_VERSION=1.6.39
+# FT_VERSION=2.13.2
+# BZIP2_VERSION=1.0.8
+# MPG123_VERSION=1.31.3
+# LIBMODPLUG_VERSION=0.8.8.5
+
+## SDL2
+git clone --depth 1 -b $SDL2_BRANCH https://github.com/libsdl-org/SDL SDL2-$SDL2_BRANCH
+mkdir -p SDL2-$SDL2_BRANCH/build
+cd SDL2-$SDL2_BRANCH/build && ../configure --disable-video-wayland
+make install -j$(nproc)
+
+
+## Build Love2d
 git clone https://github.com/love2d/love.git
 cd love
 git switch 11.x
