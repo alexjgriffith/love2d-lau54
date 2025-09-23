@@ -1,8 +1,9 @@
 name: continuous-integration
-on:
-  push:
-    tags:
-      - 'v*'
+# on:
+#   push:
+#     tags:
+#       - 'v*'
+on: [push]
 
 permissions:
   contents: write
@@ -11,17 +12,24 @@ jobs:
   release:
     runs-on: ubuntu-20.04
     steps:
+       - name: Checkout
+         uses: actions/checkout@v3
        - name: build appimage
          run: ./build-love-appimage.sh
-       - name: Create release
-         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-           tag: ${{ github.ref_name }}
-         run: |
-           gh release create "$tag" \
-           '/release/love-11.5-lua5.4.AppImage#love-11.5-lua5.4.AppImage' \
-           --repo="$GITHUB_REPOSITORY" \
-           --title="${tag#v}" \
-           --generate-notes
+      - name: Save Artefact
+        uses: actions/upload-artifact@v3
+        with:
+          name: love-11.5-lua5.4-${{ github.sha }}.AppImage
+          path: /release/love-11.5-lua5.4.AppImage
+       # - name: Create release
+       #   env:
+       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       #     tag: ${{ github.ref_name }}
+       #   run: |
+       #     gh release create "$tag" \
+       #     '/release/love-11.5-lua5.4.AppImage#love-11.5-lua5.4.AppImage' \
+       #     --repo="$GITHUB_REPOSITORY" \
+       #     --title="${tag#v}" \
+       #     --generate-notes
 
            
