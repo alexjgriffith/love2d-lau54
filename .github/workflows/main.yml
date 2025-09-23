@@ -11,15 +11,17 @@ jobs:
   release:
     runs-on: ubuntu-20.04
     steps:
-    - name: build appimage
-      run: ./build-love-appimage.sh
-    - name: Create release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.ref_name }}
-      run: |
-        gh release create "$tag" \
-        '/release/love-11.5-lua5.4.AppImage#love-11.5-lua5.4.AppImage' \
-        --repo="$GITHUB_REPOSITORY" \
-        --title="${tag#v}" \
-        --generate-notes
+       - name: build appimage
+         run: ./build-love-appimage.sh
+       - name: Create release
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           tag: ${{ github.ref_name }}
+         run: |
+           gh release create "$tag" \
+           '/release/love-11.5-lua5.4.AppImage#love-11.5-lua5.4.AppImage' \
+           --repo="$GITHUB_REPOSITORY" \
+           --title="${tag#v}" \
+           --generate-notes
+
+           
