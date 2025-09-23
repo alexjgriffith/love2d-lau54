@@ -13,7 +13,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: love-11.5-lua5.4-${{ github.sha }}.AppImage
-        path: /release/love-11.5-lua5.4.AppImage
+        path: release/love-11.5-lua5.4.AppImage
        # - name: Create release
        #   env:
        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
