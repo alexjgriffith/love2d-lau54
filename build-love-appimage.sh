@@ -9,7 +9,7 @@ sudo apt-get install --assume-yes build-essential git make cmake autoconf automa
      libgl1-mesa-dev libdbus-1-dev libudev-dev libgles2-mesa-dev \
      libegl1-mesa-dev libibus-1.0-dev fcitx-libs-dev libsamplerate0-dev \
      libsndio-dev libwayland-dev libxkbcommon-dev libdrm-dev libgbm-dev \
-     liblua5.4-dev
+     liblua5.4-dev libmodplug-dev
 
 git clone https://github.com/love2d/love.git
 cd love
