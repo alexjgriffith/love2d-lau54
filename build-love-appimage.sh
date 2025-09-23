@@ -1,16 +1,21 @@
+mkdir -p release
+
+sudo apt-get update
+
 sudo apt-get install --assume-yes build-essential git make cmake autoconf automake \
      libtool pkg-config libasound2-dev libpulse-dev libaudio-dev \
      libjack-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev \
      libxfixes-dev libxi-dev libxinerama-dev libxxf86vm-dev libxss-dev \
      libgl1-mesa-dev libdbus-1-dev libudev-dev libgles2-mesa-dev \
      libegl1-mesa-dev libibus-1.0-dev fcitx-libs-dev libsamplerate0-dev \
-     libsndio-dev libwayland-dev libxkbcommon-dev libdrm-dev libgbm-dev
+     libsndio-dev libwayland-dev libxkbcommon-dev libdrm-dev libgbm-dev \
+     liblua5.4-dev
 
 git clone https://github.com/love2d/love.git
 cd love
 git switch 11.x
 ## Patch CMake FIle to use Lua5.4 instead of Lua5.1
-sed -i 's/Lua51/Lua/g'
+sed -i 's/Lua51/Lua/g' CMakeLists.txt
 mkdir -p build
 cd build
 cmake .. -DLOVE_JIT=0 -DCMAKE_INSTALL_PREFIX=/usr && make -j$(nproc)
@@ -22,4 +27,4 @@ cat ../platform/unix/love.desktop.in | sed "s/@bindir@\/love %f/love \./g"> love
 
 cp ../platform/unix/love.svg .
 ./linuxdeploy-x86_64.AppImage --appdir AppDir -e love -i love.svg -d love.desktop  --output appimage
-mv LÖVE-x86_64.AppImage love-11.5.AppImage
+mv LÖVE-x86_64.AppImage ../../release/love-11.5-lua5.4.AppImage
