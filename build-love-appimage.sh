@@ -27,7 +27,7 @@ git switch 11.x
 ## Patch CMake FIle to use Lua5.4 instead of Lua5.1
 sed -i 's/Lua51/Lua/g' CMakeLists.txt
 mkdir -p build
-mv ../../tmp/installdir .
+mv ../tmp/installdir .
 cd build
 
 cmake .. -DCMAKE_LIBRARY_PATH=installdir/lib/ \
