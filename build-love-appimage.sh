@@ -30,10 +30,12 @@ mkdir -p build
 mv ../tmp/installdir .
 cd build
 
-cmake .. -DCMAKE_LIBRARY_PATH=installdir/lib/ \
+cmake .. \
+      -DCMAKE_LIBRARY_PATH=installdir/lib/ \
       -DCMAKE_INCLUDE_PATH=installdir/include/ \
       -DSDL2_DIR=installdir/lib/cmake/SDL2 \
-   -DLOVE_JIT=0 -DCMAKE_INSTALL_PREFIX=/usr
+      -DOpenAL_DIR=installdir/lib/cmake/OpenAL \
+      -DLOVE_JIT=0 -DCMAKE_INSTALL_PREFIX=/usr
 
 CFLAGS="-Iinstalldir/include" \
       PKG_CONFIG_PATH=installdir/lib/pkgconfig \
