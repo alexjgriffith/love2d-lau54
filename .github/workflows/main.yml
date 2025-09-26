@@ -30,7 +30,7 @@ jobs:
       uses: actions/checkout@v3
       with:        
         path: megasource/libs/love
-        repository: alexjgriffith/megasource
+        repository: alexjgriffith/love
         ref: 11.5-lua5.4
     - name: Configure
       shell: cmd

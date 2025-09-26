@@ -48,13 +48,13 @@ CFLAGS="-Iinstalldir/include" \
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20250213-2/linuxdeploy-x86_64.AppImage
 chmod +x linuxdeploy-x86_64.AppImage
 
-cat ../platform/unix/love.desktop.in | sed "s/@bindir@\/love %f/love \./g"> love.desktop
+cat ../platform/unix/love.desktop.in | sed "s/@bindir@\/love/love/g"> love.desktop
 
 cp ../platform/unix/love.svg .
 mkdir -p AppDir
 mkdir -p AppDir/usr
-cp love.sh AppDir/AppRun
+cp ../../love.sh AppDir/AppRun
 chmod +x AppDir/AppRun
 ## cp -rf ../installdir/* AppDir/usr
-./linuxdeploy-x86_64.AppImage --appdir AppDir -e love -i love.svg -d love.desktop  --output appimage
+./linuxdeploy-x86_64.AppImage --appdir AppDir --custom-apprun=../../love.sh -e love -i love.svg -d love.desktop  --output appimage
 mv LÖVE-x86_64.AppImage ../../release/love-11.5-lua5.4.AppImage
