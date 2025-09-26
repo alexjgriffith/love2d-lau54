@@ -33,7 +33,6 @@ cd build
 cmake .. -DCMAKE_LIBRARY_PATH=installdir/lib/ \
       -DCMAKE_INCLUDE_PATH=installdir/include/ \
       -DSDL2_DIR=installdir/lib/cmake/SDL2 \
-      -DOpenAL_DIR=installdir/lib/cmake/OpenAL \
    -DLOVE_JIT=0 -DCMAKE_INSTALL_PREFIX=/usr
 
 CFLAGS="-Iinstalldir/include" \
@@ -43,7 +42,6 @@ CFLAGS="-Iinstalldir/include" \
       lua_LIBS="-Linstalldir/lib/lua/" \
       make -j$(nproc)
 
-
 ## Make AppImage
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20250213-2/linuxdeploy-x86_64.AppImage
 chmod +x linuxdeploy-x86_64.AppImage
@@ -51,5 +49,10 @@ chmod +x linuxdeploy-x86_64.AppImage
 cat ../platform/unix/love.desktop.in | sed "s/@bindir@\/love %f/love \./g"> love.desktop
 
 cp ../platform/unix/love.svg .
+mkdir -p AppDir
+mkdir -p AppDir/usr
+cp love.sh AppDir/AppRun
+chmod +x AppDir/AppRun
+## cp -rf ../installdir/* AppDir/usr
 ./linuxdeploy-x86_64.AppImage --appdir AppDir -e love -i love.svg -d love.desktop  --output appimage
 mv LÖVE-x86_64.AppImage ../../release/love-11.5-lua5.4.AppImage
